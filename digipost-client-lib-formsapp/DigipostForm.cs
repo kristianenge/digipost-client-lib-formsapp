@@ -21,8 +21,7 @@ namespace digipost_client_lib_formsapp
         }
         private void InitDigipostService()
         {
-            int timeout;
-            int.TryParse(Settings.Default.timeout, out timeout);
+            var timeout = Settings.Default.timeoutInMs;
             _digipostService = new DigipostService(txt_config_technicalID.Text, txt_config_thumbprint.Text,
                 txt_config_url.Text, timeout);
         }

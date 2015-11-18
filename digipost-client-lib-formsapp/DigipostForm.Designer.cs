@@ -326,7 +326,6 @@
             this.txt_config_thumbprint.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::digipost_client_lib_formsapp.Properties.Settings.Default, "thumbprint", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txt_config_thumbprint.Location = new System.Drawing.Point(479, 5);
             this.txt_config_thumbprint.Name = "txt_config_thumbprint";
-            this.txt_config_thumbprint.PasswordChar = '*';
             this.txt_config_thumbprint.Size = new System.Drawing.Size(100, 20);
             this.txt_config_thumbprint.TabIndex = 5;
             this.txt_config_thumbprint.Text = global::digipost_client_lib_formsapp.Properties.Settings.Default.thumbprint;

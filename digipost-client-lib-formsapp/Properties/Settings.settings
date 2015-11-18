@@ -11,7 +11,7 @@
     <Setting Name="thumbprint" Type="System.String" Scope="User">
       <Value Profile="(Default)">d6 5e 6c 4c 77 fc 0e 0d c5 f5 ac 32 bc 43 70 1f a8 b0 3d 21</Value>
     </Setting>
-    <Setting Name="timeout" Type="System.String" Scope="User">
+    <Setting Name="timeoutInMs" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">30000</Value>
     </Setting>
   </Settings>

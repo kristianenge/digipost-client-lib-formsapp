@@ -62,12 +62,12 @@ namespace digipost_client_lib_formsapp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("30000")]
-        public string timeout {
+        public int timeoutInMs {
             get {
-                return ((string)(this["timeout"]));
+                return ((int)(this["timeoutInMs"]));
             }
             set {
-                this["timeout"] = value;
+                this["timeoutInMs"] = value;
             }
         }
     }
