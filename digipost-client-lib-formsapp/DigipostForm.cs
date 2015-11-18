@@ -13,15 +13,12 @@ namespace digipost_client_lib_formsapp
 {
     public partial class DigipostForm : Form
     {
-        
         private DigipostService _digipostService;
-
         public DigipostForm()
         {
             InitializeComponent();
             InitDigipostService();
         }
-
         private void InitDigipostService()
         {
             int timeout;
@@ -29,7 +26,24 @@ namespace digipost_client_lib_formsapp
             _digipostService = new DigipostService(txt_config_technicalID.Text, txt_config_thumbprint.Text,
                 txt_config_url.Text, timeout);
         }
+        private void AppendResponse(string text)
+        {
+            rtf_response_text.AppendText(text + Environment.NewLine);
+            rtf_response_text.ScrollToCaret();
+        }
+        private void DigipostForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.Default.Save();
+        }
+        
+        #region Config
+        private void btn_config_update_Click(object sender, EventArgs e)
+        {
+            InitDigipostService();
+        }
+        #endregion
 
+        #region Identify
         private async void btnIdentify_Click(object sender, EventArgs e)
         {
             try
@@ -52,10 +66,10 @@ namespace digipost_client_lib_formsapp
             }
         }
 
-        private void btn_config_update_Click(object sender, EventArgs e)
-        {
-            InitDigipostService();
-        }
+        #endregion
+        
+        #region Search
+
 
         private async void txt_Search_searchString_TextChanged(object sender, EventArgs e)
         {
@@ -73,16 +87,10 @@ namespace digipost_client_lib_formsapp
             }
         }
 
-        private void AppendResponse(string text)
-        {
-            rtf_response_text.AppendText(text + Environment.NewLine);
-            rtf_response_text.ScrollToCaret();
-        }
-
         private void lbox_search_result_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var listBox = (ListBox) sender;
-            var selectedItem = (SearchDetails) listBox.SelectedItem;
+            var listBox = (ListBox)sender;
+            var selectedItem = (SearchDetails)listBox.SelectedItem;
 
             btn_search_sendTo.Enabled = btn_search_moreInfo.Enabled = selectedItem != null;
         }
@@ -95,11 +103,15 @@ namespace digipost_client_lib_formsapp
 
         private void btn_search_sendTo_Click(object sender, EventArgs e)
         {
-            var selectedItem = (SearchDetails) lbox_search_result.SelectedItem;
+            var selectedItem = (SearchDetails)lbox_search_result.SelectedItem;
             txt_send_digipostAddress.Text = selectedItem.DigipostAddress;
             TabPanel.SelectTab(2);
         }
 
+
+        #endregion
+
+        #region Send
         private void btn_send_selectFile_Click(object sender, EventArgs e)
         {
             var result = openFileDialog.ShowDialog(); // Show the dialog.
@@ -149,10 +161,6 @@ namespace digipost_client_lib_formsapp
             btn_send_send.Enabled = !string.IsNullOrEmpty(txt_send_digipostAddress.Text) &&
                                     !string.IsNullOrEmpty(txt_send_file.Text);
         }
-
-        private void DigipostForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Settings.Default.Save();
-        }
+        #endregion
     }
 }
