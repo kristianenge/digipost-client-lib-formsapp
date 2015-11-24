@@ -45,6 +45,7 @@
             this.btn_config_update.TabIndex = 13;
             this.btn_config_update.Text = "Update";
             this.btn_config_update.UseVisualStyleBackColor = true;
+            this.btn_config_update.Click += new System.EventHandler(this.btn_config_update_Click);
             // 
             // txt_config_thumbprint
             // 

@@ -27,13 +27,15 @@ namespace digipost_client_lib_formsapp
             InitializeComponent();
             InitDigipostService();
             InitDropDownlists();
-
+            InitConfig();
+        }
+        private void InitConfig()
+        {
             var config = new Config();
             config.Closing += ExtractConfigFromForm;
             config.Show();
             config.Close();
         }
-
         private void InitDropDownlists()
         {
             foreach (var id in Enum.GetValues(typeof(IdentificationType)))
