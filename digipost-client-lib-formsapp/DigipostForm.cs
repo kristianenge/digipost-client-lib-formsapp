@@ -8,6 +8,10 @@ using Digipost.Api.Client.Domain.Exceptions;
 using Digipost.Api.Client.Domain.Identify;
 using Digipost.Api.Client.Domain.Search;
 using Digipost.Api.Client.Domain.SendMessage;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace digipost_client_lib_formsapp
 {
@@ -18,6 +22,15 @@ namespace digipost_client_lib_formsapp
         {
             InitializeComponent();
             InitDigipostService();
+            InitDropDownlists();
+        }
+
+        private void InitDropDownlists()
+        {
+            foreach (var id in Enum.GetValues(typeof(IdentificationType)))
+            {
+                comboId.Items.Add(id);
+            }
         }
         private void InitDigipostService()
         {
@@ -34,7 +47,7 @@ namespace digipost_client_lib_formsapp
         {
             Settings.Default.Save();
         }
-        
+
         #region Config
         private void btn_config_update_Click(object sender, EventArgs e)
         {
@@ -66,7 +79,7 @@ namespace digipost_client_lib_formsapp
         }
 
         #endregion
-        
+
         #region Search
 
 
@@ -104,6 +117,7 @@ namespace digipost_client_lib_formsapp
         {
             var selectedItem = (SearchDetails)lbox_search_result.SelectedItem;
             txt_send_digipostAddress.Text = selectedItem.DigipostAddress;
+            comboId.SelectedItem = IdentificationType.DigipostAddress;
             TabPanel.SelectTab(2);
         }
 
@@ -111,6 +125,8 @@ namespace digipost_client_lib_formsapp
         #endregion
 
         #region Send
+        public string ExtractedHtmlContent { get; set; }
+
         private void btn_send_selectFile_Click(object sender, EventArgs e)
         {
             var result = openFileDialog.ShowDialog(); // Show the dialog.
@@ -123,26 +139,43 @@ namespace digipost_client_lib_formsapp
 
         private async void btn_send_send_Click(object sender, EventArgs e)
         {
+            await SendMessage(txt_send_subject.Text, (IdentificationType)comboId.SelectedItem, txt_send_digipostAddress.Text, txt_send_file.Text);
+        }
+
+        private async Task SendMessage(string subject, IdentificationType identification, string identificationValue, string filePath)
+        {
             byte[] file = null;
             var fileType = "";
 
-            if (openFileDialog.FileName != null && !string.IsNullOrEmpty(txt_send_file.Text))
+            if (openFileDialog.FileName != null && !string.IsNullOrEmpty(filePath))
             {
                 file = File.ReadAllBytes(openFileDialog.FileName);
                 fileType = openFileDialog.FileName.Split('.')[1];
             }
-            var subject = txt_send_subject.Text;
-            var digipostAddress = txt_send_digipostAddress.Text;
+            else if (!string.IsNullOrEmpty(ExtractedHtmlContent))
+            {
+                file = Encoding.UTF8.GetBytes(ExtractedHtmlContent);
+                fileType = "html";
+            }
+
             try
             {
-                var response = await _digipostService.Send(file, fileType, subject, digipostAddress);
+                var response = await _digipostService.Send(file, fileType, subject, identification, identificationValue);
                 AppendResponse("Send: Status: " + response.Status + ", DeliveryMethod: " + response.DeliveryMethod);
+                ResetSendView();
             }
             catch (ClientResponseException cre)
             {
                 var message = cre.InnerException?.Message ?? cre.Error.ToString();
                 AppendResponse("Send: Status:" + message);
             }
+        }
+
+        private void ResetSendView()
+        {
+            ExtractedHtmlContent = null;
+            txt_send_file.Text = null;
+            ActivateSendButton();
         }
 
         private void txt_send_digipostAddress_TextChanged(object sender, EventArgs e)
@@ -157,9 +190,28 @@ namespace digipost_client_lib_formsapp
 
         private void ActivateSendButton()
         {
-            btn_send_send.Enabled = !string.IsNullOrEmpty(txt_send_digipostAddress.Text) &&
-                                    !string.IsNullOrEmpty(txt_send_file.Text);
+            btn_send_send.Enabled = (!string.IsNullOrEmpty(txt_send_digipostAddress.Text)) &&
+                                    !string.IsNullOrEmpty(txt_send_file.Text) || !string.IsNullOrEmpty(ExtractedHtmlContent);
         }
+
+
+        private void btn_send_createDocument_Click(object sender, EventArgs e)
+        {
+            var editor = new Editor();
+            editor.Closing += ExtractTextFromEditorForm;
+            editor.Show();
+        }
+
+        private void ExtractTextFromEditorForm(object sender, CancelEventArgs args)
+        {
+            var editorForm = (Form)sender;
+            foreach (var simpleHtml in (from object control in editorForm.Controls select control as Control into c where c.GetType() == typeof(RichTextBox) select c.Text).Select(text => text.Replace("\n", "<br/>")).Select(content => $"<html><body>{content}</body></html>"))
+            {
+                ExtractedHtmlContent = simpleHtml;
+            }
+            ActivateSendButton();
+        }
+
         #endregion
     }
 }

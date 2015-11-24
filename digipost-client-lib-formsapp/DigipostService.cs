@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Digipost.Api.Client;
 using Digipost.Api.Client.Api;
 using Digipost.Api.Client.Domain.Enums;
@@ -34,9 +35,28 @@ namespace digipost_client_lib_formsapp
             return await GetClient().SearchAsync(searchText);
         }
 
-        public virtual async Task<IMessageDeliveryResult> Send(byte[] fileContent, string filetype, string subject,
-            string digipostAddress, SensitivityLevel sensitivity = SensitivityLevel.Normal,
+        public virtual async Task<IMessageDeliveryResult> Send(byte[] fileContent, string filetype, string subject,IdentificationType identification,
+            string identificationValue, SensitivityLevel sensitivity = SensitivityLevel.Normal,
             AuthenticationLevel authentication = AuthenticationLevel.Password, SmsNotification smsNotification = null)
+        {
+            var recipient = new RecipientById(identification, identificationValue);
+
+            var primaryDocument = new Document(subject, filetype, fileContent)
+            {
+                SensitivityLevel = sensitivity,
+                AuthenticationLevel = authentication
+            };
+            if (smsNotification != null)
+                primaryDocument.SmsNotification = smsNotification;
+
+            var m = new Message(recipient, primaryDocument);
+
+            return await GetClient().SendMessageAsync(m);
+        }
+
+        public virtual async Task<IMessageDeliveryResult> Send(Stream fileContent, string filetype, string subject,
+           string digipostAddress, SensitivityLevel sensitivity = SensitivityLevel.Normal,
+           AuthenticationLevel authentication = AuthenticationLevel.Password, SmsNotification smsNotification = null)
         {
             var recipient = new RecipientById(IdentificationType.DigipostAddress, digipostAddress);
 
