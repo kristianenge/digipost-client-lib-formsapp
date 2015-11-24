@@ -31,14 +31,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.rtf_response_text = new System.Windows.Forms.RichTextBox();
             this.lbl_response_info = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btn_config_update = new System.Windows.Forms.Button();
-            this.txt_config_thumbprint = new System.Windows.Forms.TextBox();
-            this.lbl_config_thumbrint = new System.Windows.Forms.Label();
-            this.txt_config_url = new System.Windows.Forms.TextBox();
-            this.lbl_config_url = new System.Windows.Forms.Label();
-            this.txt_config_technicalID = new System.Windows.Forms.TextBox();
-            this.lbl_conf_technicalID = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.TP_Send = new System.Windows.Forms.TabPage();
             this.btn_send_selectFile = new System.Windows.Forms.Button();
@@ -61,8 +53,8 @@
             this.txt_identify_ssn = new System.Windows.Forms.TextBox();
             this.lbl_Identify_ssn = new System.Windows.Forms.Label();
             this.TP_Identify = new System.Windows.Forms.TabPage();
+            this.btnConfig = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.TP_Send.SuspendLayout();
             this.TP_Search.SuspendLayout();
             this.TabPanel.SuspendLayout();
@@ -95,84 +87,6 @@
             this.lbl_response_info.Size = new System.Drawing.Size(55, 13);
             this.lbl_response_info.TabIndex = 0;
             this.lbl_response_info.Text = "Response";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.btn_config_update);
-            this.panel2.Controls.Add(this.txt_config_thumbprint);
-            this.panel2.Controls.Add(this.lbl_config_thumbrint);
-            this.panel2.Controls.Add(this.txt_config_url);
-            this.panel2.Controls.Add(this.lbl_config_url);
-            this.panel2.Controls.Add(this.txt_config_technicalID);
-            this.panel2.Controls.Add(this.lbl_conf_technicalID);
-            this.panel2.Location = new System.Drawing.Point(2, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(677, 26);
-            this.panel2.TabIndex = 5;
-            // 
-            // btn_config_update
-            // 
-            this.btn_config_update.Location = new System.Drawing.Point(602, 3);
-            this.btn_config_update.Name = "btn_config_update";
-            this.btn_config_update.Size = new System.Drawing.Size(75, 23);
-            this.btn_config_update.TabIndex = 6;
-            this.btn_config_update.Text = "Update";
-            this.btn_config_update.UseVisualStyleBackColor = true;
-            this.btn_config_update.Click += new System.EventHandler(this.btn_config_update_Click);
-            // 
-            // txt_config_thumbprint
-            // 
-            this.txt_config_thumbprint.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::digipost_client_lib_formsapp.Properties.Settings.Default, "thumbprint", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txt_config_thumbprint.Location = new System.Drawing.Point(479, 5);
-            this.txt_config_thumbprint.Name = "txt_config_thumbprint";
-            this.txt_config_thumbprint.Size = new System.Drawing.Size(100, 20);
-            this.txt_config_thumbprint.TabIndex = 5;
-            this.txt_config_thumbprint.Text = global::digipost_client_lib_formsapp.Properties.Settings.Default.thumbprint;
-            // 
-            // lbl_config_thumbrint
-            // 
-            this.lbl_config_thumbrint.AutoSize = true;
-            this.lbl_config_thumbrint.Location = new System.Drawing.Point(413, 9);
-            this.lbl_config_thumbrint.Name = "lbl_config_thumbrint";
-            this.lbl_config_thumbrint.Size = new System.Drawing.Size(60, 13);
-            this.lbl_config_thumbrint.TabIndex = 4;
-            this.lbl_config_thumbrint.Text = "Thumbprint";
-            // 
-            // txt_config_url
-            // 
-            this.txt_config_url.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::digipost_client_lib_formsapp.Properties.Settings.Default, "url", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txt_config_url.Location = new System.Drawing.Point(247, 5);
-            this.txt_config_url.Name = "txt_config_url";
-            this.txt_config_url.Size = new System.Drawing.Size(151, 20);
-            this.txt_config_url.TabIndex = 3;
-            this.txt_config_url.Text = global::digipost_client_lib_formsapp.Properties.Settings.Default.url;
-            // 
-            // lbl_config_url
-            // 
-            this.lbl_config_url.AutoSize = true;
-            this.lbl_config_url.Location = new System.Drawing.Point(217, 9);
-            this.lbl_config_url.Name = "lbl_config_url";
-            this.lbl_config_url.Size = new System.Drawing.Size(20, 13);
-            this.lbl_config_url.TabIndex = 2;
-            this.lbl_config_url.Text = "Url";
-            // 
-            // txt_config_technicalID
-            // 
-            this.txt_config_technicalID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::digipost_client_lib_formsapp.Properties.Settings.Default, "technicalID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txt_config_technicalID.Location = new System.Drawing.Point(111, 6);
-            this.txt_config_technicalID.Name = "txt_config_technicalID";
-            this.txt_config_technicalID.Size = new System.Drawing.Size(100, 20);
-            this.txt_config_technicalID.TabIndex = 1;
-            this.txt_config_technicalID.Text = global::digipost_client_lib_formsapp.Properties.Settings.Default.technicalID;
-            // 
-            // lbl_conf_technicalID
-            // 
-            this.lbl_conf_technicalID.AutoSize = true;
-            this.lbl_conf_technicalID.Location = new System.Drawing.Point(4, 7);
-            this.lbl_conf_technicalID.Name = "lbl_conf_technicalID";
-            this.lbl_conf_technicalID.Size = new System.Drawing.Size(101, 13);
-            this.lbl_conf_technicalID.TabIndex = 0;
-            this.lbl_conf_technicalID.Text = "Technical sender Id";
             // 
             // openFileDialog
             // 
@@ -345,10 +259,10 @@
             this.TabPanel.Controls.Add(this.TP_Identify);
             this.TabPanel.Controls.Add(this.TP_Search);
             this.TabPanel.Controls.Add(this.TP_Send);
-            this.TabPanel.Location = new System.Drawing.Point(2, 25);
+            this.TabPanel.Location = new System.Drawing.Point(2, 0);
             this.TabPanel.Name = "TabPanel";
             this.TabPanel.SelectedIndex = 0;
-            this.TabPanel.Size = new System.Drawing.Size(681, 238);
+            this.TabPanel.Size = new System.Drawing.Size(681, 263);
             this.TabPanel.TabIndex = 3;
             // 
             // btnIdentify
@@ -384,25 +298,33 @@
             this.TP_Identify.Location = new System.Drawing.Point(4, 22);
             this.TP_Identify.Name = "TP_Identify";
             this.TP_Identify.Padding = new System.Windows.Forms.Padding(3);
-            this.TP_Identify.Size = new System.Drawing.Size(673, 212);
+            this.TP_Identify.Size = new System.Drawing.Size(673, 237);
             this.TP_Identify.TabIndex = 0;
             this.TP_Identify.Text = "Identify";
             this.TP_Identify.UseVisualStyleBackColor = true;
+            // 
+            // btnConfig
+            // 
+            this.btnConfig.Location = new System.Drawing.Point(635, 0);
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(48, 23);
+            this.btnConfig.TabIndex = 7;
+            this.btnConfig.Text = "Config";
+            this.btnConfig.UseVisualStyleBackColor = true;
+            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
             // 
             // DigipostForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 441);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.btnConfig);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.TabPanel);
             this.Name = "DigipostForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DigipostForm_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.TP_Send.ResumeLayout(false);
             this.TP_Send.PerformLayout();
             this.TP_Search.ResumeLayout(false);
@@ -418,14 +340,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lbl_response_info;
         private System.Windows.Forms.RichTextBox rtf_response_text;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button btn_config_update;
-        private System.Windows.Forms.TextBox txt_config_thumbprint;
-        private System.Windows.Forms.Label lbl_config_thumbrint;
-        private System.Windows.Forms.TextBox txt_config_url;
-        private System.Windows.Forms.Label lbl_config_url;
-        private System.Windows.Forms.TextBox txt_config_technicalID;
-        private System.Windows.Forms.Label lbl_conf_technicalID;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.TabPage TP_Send;
         private System.Windows.Forms.ComboBox comboId;
@@ -448,5 +362,6 @@
         private System.Windows.Forms.Label lbl_Identify_ssn;
         private System.Windows.Forms.TextBox txt_identify_ssn;
         private System.Windows.Forms.Button btnIdentify;
+        private System.Windows.Forms.Button btnConfig;
     }
 }

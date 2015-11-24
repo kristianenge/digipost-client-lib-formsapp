@@ -17,12 +17,21 @@ namespace digipost_client_lib_formsapp
 {
     public partial class DigipostForm : Form
     {
+        private string _technicalId;
+        private string _thumbprint;
+        private string _url;
+
         private DigipostService _digipostService;
         public DigipostForm()
         {
             InitializeComponent();
             InitDigipostService();
             InitDropDownlists();
+
+            var config = new Config();
+            config.Closing += ExtractConfigFromForm;
+            config.Show();
+            config.Close();
         }
 
         private void InitDropDownlists()
@@ -35,8 +44,8 @@ namespace digipost_client_lib_formsapp
         private void InitDigipostService()
         {
             var timeout = Settings.Default.timeoutInMs;
-            _digipostService = new DigipostService(txt_config_technicalID.Text, txt_config_thumbprint.Text,
-                txt_config_url.Text, timeout);
+            _digipostService = new DigipostService(_technicalId, _thumbprint,
+                _url, timeout);
         }
         private void AppendResponse(string text)
         {
@@ -49,10 +58,36 @@ namespace digipost_client_lib_formsapp
         }
 
         #region Config
-        private void btn_config_update_Click(object sender, EventArgs e)
+      
+
+        private void btnConfig_Click(object sender, EventArgs e)
         {
+            var config = new Config();
+            config.Closing += ExtractConfigFromForm;
+            config.Show();
+        }
+
+        private void ExtractConfigFromForm(object sender, CancelEventArgs e)
+        {
+            var configForm = (Form)sender;
+            foreach (var texBoxController in configForm.Controls.Cast<object>().Where(control => control.GetType() == typeof (TextBox)).Cast<TextBox>())
+            {
+                switch (texBoxController.Name)
+                {
+                    case "txt_config_technicalID":
+                        _technicalId = texBoxController.Text;
+                        break;
+                    case "txt_config_thumbprint":
+                        _thumbprint = texBoxController.Text;
+                        break;
+                    case "txt_config_url":
+                        _url = texBoxController.Text;
+                        break;
+                }
+            }
             InitDigipostService();
         }
+
         #endregion
 
         #region Identify
@@ -193,8 +228,7 @@ namespace digipost_client_lib_formsapp
             btn_send_send.Enabled = (!string.IsNullOrEmpty(txt_send_digipostAddress.Text)) &&
                                     !string.IsNullOrEmpty(txt_send_file.Text) || !string.IsNullOrEmpty(ExtractedHtmlContent);
         }
-
-
+        
         private void btn_send_createDocument_Click(object sender, EventArgs e)
         {
             var editor = new Editor();
@@ -213,5 +247,7 @@ namespace digipost_client_lib_formsapp
         }
 
         #endregion
+
+        
     }
 }
