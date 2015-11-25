@@ -36,13 +36,13 @@
             // 
             this.rtb_editor_input.Location = new System.Drawing.Point(12, 12);
             this.rtb_editor_input.Name = "rtb_editor_input";
-            this.rtb_editor_input.Size = new System.Drawing.Size(260, 205);
+            this.rtb_editor_input.Size = new System.Drawing.Size(342, 205);
             this.rtb_editor_input.TabIndex = 0;
             this.rtb_editor_input.Text = "";
             // 
             // btn_editor_ok
             // 
-            this.btn_editor_ok.Location = new System.Drawing.Point(100, 223);
+            this.btn_editor_ok.Location = new System.Drawing.Point(131, 223);
             this.btn_editor_ok.Name = "btn_editor_ok";
             this.btn_editor_ok.Size = new System.Drawing.Size(75, 23);
             this.btn_editor_ok.TabIndex = 1;
@@ -54,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(363, 249);
             this.Controls.Add(this.btn_editor_ok);
             this.Controls.Add(this.rtb_editor_input);
             this.MaximizeBox = false;

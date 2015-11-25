@@ -33,26 +33,26 @@
             this.lbl_response_info = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.TP_Send = new System.Windows.Forms.TabPage();
-            this.btn_send_selectFile = new System.Windows.Forms.Button();
-            this.btn_send_send = new System.Windows.Forms.Button();
-            this.lbl_send_subject = new System.Windows.Forms.Label();
-            this.lbl_send_file = new System.Windows.Forms.Label();
-            this.txt_send_digipostAddress = new System.Windows.Forms.TextBox();
-            this.txt_send_subject = new System.Windows.Forms.TextBox();
-            this.txt_send_file = new System.Windows.Forms.TextBox();
-            this.btn_send_createDocument = new System.Windows.Forms.Button();
             this.comboId = new System.Windows.Forms.ComboBox();
+            this.btn_send_createDocument = new System.Windows.Forms.Button();
+            this.txt_send_file = new System.Windows.Forms.TextBox();
+            this.txt_send_subject = new System.Windows.Forms.TextBox();
+            this.txt_send_digipostAddress = new System.Windows.Forms.TextBox();
+            this.lbl_send_file = new System.Windows.Forms.Label();
+            this.lbl_send_subject = new System.Windows.Forms.Label();
+            this.btn_send_send = new System.Windows.Forms.Button();
+            this.btn_send_selectFile = new System.Windows.Forms.Button();
             this.TP_Search = new System.Windows.Forms.TabPage();
-            this.lbl_Search_searchString = new System.Windows.Forms.Label();
-            this.txt_Search_searchString = new System.Windows.Forms.TextBox();
-            this.lbox_search_result = new System.Windows.Forms.ListBox();
-            this.btn_search_moreInfo = new System.Windows.Forms.Button();
             this.btn_search_sendTo = new System.Windows.Forms.Button();
+            this.btn_search_moreInfo = new System.Windows.Forms.Button();
+            this.lbox_search_result = new System.Windows.Forms.ListBox();
+            this.txt_Search_searchString = new System.Windows.Forms.TextBox();
+            this.lbl_Search_searchString = new System.Windows.Forms.Label();
             this.TabPanel = new System.Windows.Forms.TabControl();
-            this.btnIdentify = new System.Windows.Forms.Button();
-            this.txt_identify_ssn = new System.Windows.Forms.TextBox();
-            this.lbl_Identify_ssn = new System.Windows.Forms.Label();
             this.TP_Identify = new System.Windows.Forms.TabPage();
+            this.lbl_Identify_ssn = new System.Windows.Forms.Label();
+            this.txt_identify_ssn = new System.Windows.Forms.TextBox();
+            this.btnIdentify = new System.Windows.Forms.Button();
             this.btnConfig = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.TP_Send.SuspendLayout();
@@ -105,20 +105,70 @@
             this.TP_Send.Controls.Add(this.btn_send_selectFile);
             this.TP_Send.Location = new System.Drawing.Point(4, 22);
             this.TP_Send.Name = "TP_Send";
-            this.TP_Send.Size = new System.Drawing.Size(673, 212);
+            this.TP_Send.Size = new System.Drawing.Size(673, 237);
             this.TP_Send.TabIndex = 2;
             this.TP_Send.Text = "Send";
             this.TP_Send.UseVisualStyleBackColor = true;
             // 
-            // btn_send_selectFile
+            // comboId
             // 
-            this.btn_send_selectFile.Location = new System.Drawing.Point(189, 101);
-            this.btn_send_selectFile.Name = "btn_send_selectFile";
-            this.btn_send_selectFile.Size = new System.Drawing.Size(126, 23);
-            this.btn_send_selectFile.TabIndex = 2;
-            this.btn_send_selectFile.Text = "Select file to send";
-            this.btn_send_selectFile.UseVisualStyleBackColor = true;
-            this.btn_send_selectFile.Click += new System.EventHandler(this.btn_send_selectFile_Click);
+            this.comboId.FormattingEnabled = true;
+            this.comboId.Location = new System.Drawing.Point(3, 9);
+            this.comboId.Name = "comboId";
+            this.comboId.Size = new System.Drawing.Size(121, 21);
+            this.comboId.TabIndex = 9;
+            // 
+            // btn_send_createDocument
+            // 
+            this.btn_send_createDocument.Location = new System.Drawing.Point(333, 97);
+            this.btn_send_createDocument.Name = "btn_send_createDocument";
+            this.btn_send_createDocument.Size = new System.Drawing.Size(97, 23);
+            this.btn_send_createDocument.TabIndex = 8;
+            this.btn_send_createDocument.Text = "Create document";
+            this.btn_send_createDocument.UseVisualStyleBackColor = true;
+            this.btn_send_createDocument.Click += new System.EventHandler(this.btn_send_createDocument_Click);
+            // 
+            // txt_send_file
+            // 
+            this.txt_send_file.Location = new System.Drawing.Point(107, 101);
+            this.txt_send_file.Name = "txt_send_file";
+            this.txt_send_file.ReadOnly = true;
+            this.txt_send_file.Size = new System.Drawing.Size(76, 20);
+            this.txt_send_file.TabIndex = 7;
+            this.txt_send_file.TextChanged += new System.EventHandler(this.txt_send_file_TextChanged);
+            // 
+            // txt_send_subject
+            // 
+            this.txt_send_subject.Location = new System.Drawing.Point(107, 38);
+            this.txt_send_subject.Name = "txt_send_subject";
+            this.txt_send_subject.Size = new System.Drawing.Size(208, 20);
+            this.txt_send_subject.TabIndex = 5;
+            // 
+            // txt_send_digipostAddress
+            // 
+            this.txt_send_digipostAddress.Location = new System.Drawing.Point(130, 10);
+            this.txt_send_digipostAddress.Name = "txt_send_digipostAddress";
+            this.txt_send_digipostAddress.Size = new System.Drawing.Size(185, 20);
+            this.txt_send_digipostAddress.TabIndex = 1;
+            this.txt_send_digipostAddress.TextChanged += new System.EventHandler(this.txt_send_digipostAddress_TextChanged);
+            // 
+            // lbl_send_file
+            // 
+            this.lbl_send_file.AutoSize = true;
+            this.lbl_send_file.Location = new System.Drawing.Point(15, 107);
+            this.lbl_send_file.Name = "lbl_send_file";
+            this.lbl_send_file.Size = new System.Drawing.Size(23, 13);
+            this.lbl_send_file.TabIndex = 6;
+            this.lbl_send_file.Text = "File";
+            // 
+            // lbl_send_subject
+            // 
+            this.lbl_send_subject.AutoSize = true;
+            this.lbl_send_subject.Location = new System.Drawing.Point(12, 38);
+            this.lbl_send_subject.Name = "lbl_send_subject";
+            this.lbl_send_subject.Size = new System.Drawing.Size(43, 13);
+            this.lbl_send_subject.TabIndex = 4;
+            this.lbl_send_subject.Text = "Subject";
             // 
             // btn_send_send
             // 
@@ -131,65 +181,15 @@
             this.btn_send_send.UseVisualStyleBackColor = true;
             this.btn_send_send.Click += new System.EventHandler(this.btn_send_send_Click);
             // 
-            // lbl_send_subject
+            // btn_send_selectFile
             // 
-            this.lbl_send_subject.AutoSize = true;
-            this.lbl_send_subject.Location = new System.Drawing.Point(12, 38);
-            this.lbl_send_subject.Name = "lbl_send_subject";
-            this.lbl_send_subject.Size = new System.Drawing.Size(43, 13);
-            this.lbl_send_subject.TabIndex = 4;
-            this.lbl_send_subject.Text = "Subject";
-            // 
-            // lbl_send_file
-            // 
-            this.lbl_send_file.AutoSize = true;
-            this.lbl_send_file.Location = new System.Drawing.Point(15, 107);
-            this.lbl_send_file.Name = "lbl_send_file";
-            this.lbl_send_file.Size = new System.Drawing.Size(23, 13);
-            this.lbl_send_file.TabIndex = 6;
-            this.lbl_send_file.Text = "File";
-            // 
-            // txt_send_digipostAddress
-            // 
-            this.txt_send_digipostAddress.Location = new System.Drawing.Point(130, 10);
-            this.txt_send_digipostAddress.Name = "txt_send_digipostAddress";
-            this.txt_send_digipostAddress.Size = new System.Drawing.Size(185, 20);
-            this.txt_send_digipostAddress.TabIndex = 1;
-            this.txt_send_digipostAddress.TextChanged += new System.EventHandler(this.txt_send_digipostAddress_TextChanged);
-            // 
-            // txt_send_subject
-            // 
-            this.txt_send_subject.Location = new System.Drawing.Point(107, 38);
-            this.txt_send_subject.Name = "txt_send_subject";
-            this.txt_send_subject.Size = new System.Drawing.Size(208, 20);
-            this.txt_send_subject.TabIndex = 5;
-            // 
-            // txt_send_file
-            // 
-            this.txt_send_file.Location = new System.Drawing.Point(107, 101);
-            this.txt_send_file.Name = "txt_send_file";
-            this.txt_send_file.ReadOnly = true;
-            this.txt_send_file.Size = new System.Drawing.Size(76, 20);
-            this.txt_send_file.TabIndex = 7;
-            this.txt_send_file.TextChanged += new System.EventHandler(this.txt_send_file_TextChanged);
-            // 
-            // btn_send_createDocument
-            // 
-            this.btn_send_createDocument.Location = new System.Drawing.Point(331, 102);
-            this.btn_send_createDocument.Name = "btn_send_createDocument";
-            this.btn_send_createDocument.Size = new System.Drawing.Size(97, 23);
-            this.btn_send_createDocument.TabIndex = 8;
-            this.btn_send_createDocument.Text = "Create document";
-            this.btn_send_createDocument.UseVisualStyleBackColor = true;
-            this.btn_send_createDocument.Click += new System.EventHandler(this.btn_send_createDocument_Click);
-            // 
-            // comboId
-            // 
-            this.comboId.FormattingEnabled = true;
-            this.comboId.Location = new System.Drawing.Point(3, 9);
-            this.comboId.Name = "comboId";
-            this.comboId.Size = new System.Drawing.Size(121, 21);
-            this.comboId.TabIndex = 9;
+            this.btn_send_selectFile.Location = new System.Drawing.Point(201, 98);
+            this.btn_send_selectFile.Name = "btn_send_selectFile";
+            this.btn_send_selectFile.Size = new System.Drawing.Size(126, 23);
+            this.btn_send_selectFile.TabIndex = 2;
+            this.btn_send_selectFile.Text = "Select file to send";
+            this.btn_send_selectFile.UseVisualStyleBackColor = true;
+            this.btn_send_selectFile.Click += new System.EventHandler(this.btn_send_selectFile_Click);
             // 
             // TP_Search
             // 
@@ -201,47 +201,10 @@
             this.TP_Search.Location = new System.Drawing.Point(4, 22);
             this.TP_Search.Name = "TP_Search";
             this.TP_Search.Padding = new System.Windows.Forms.Padding(3);
-            this.TP_Search.Size = new System.Drawing.Size(673, 212);
+            this.TP_Search.Size = new System.Drawing.Size(673, 237);
             this.TP_Search.TabIndex = 1;
             this.TP_Search.Text = "Search";
             this.TP_Search.UseVisualStyleBackColor = true;
-            // 
-            // lbl_Search_searchString
-            // 
-            this.lbl_Search_searchString.AutoSize = true;
-            this.lbl_Search_searchString.Location = new System.Drawing.Point(7, 17);
-            this.lbl_Search_searchString.Name = "lbl_Search_searchString";
-            this.lbl_Search_searchString.Size = new System.Drawing.Size(70, 13);
-            this.lbl_Search_searchString.TabIndex = 0;
-            this.lbl_Search_searchString.Text = "Search query";
-            // 
-            // txt_Search_searchString
-            // 
-            this.txt_Search_searchString.Location = new System.Drawing.Point(83, 14);
-            this.txt_Search_searchString.Name = "txt_Search_searchString";
-            this.txt_Search_searchString.Size = new System.Drawing.Size(247, 20);
-            this.txt_Search_searchString.TabIndex = 1;
-            this.txt_Search_searchString.TextChanged += new System.EventHandler(this.txt_Search_searchString_TextChanged);
-            // 
-            // lbox_search_result
-            // 
-            this.lbox_search_result.FormattingEnabled = true;
-            this.lbox_search_result.Location = new System.Drawing.Point(10, 67);
-            this.lbox_search_result.Name = "lbox_search_result";
-            this.lbox_search_result.Size = new System.Drawing.Size(656, 95);
-            this.lbox_search_result.TabIndex = 2;
-            this.lbox_search_result.SelectedIndexChanged += new System.EventHandler(this.lbox_search_result_SelectedIndexChanged);
-            // 
-            // btn_search_moreInfo
-            // 
-            this.btn_search_moreInfo.Enabled = false;
-            this.btn_search_moreInfo.Location = new System.Drawing.Point(12, 178);
-            this.btn_search_moreInfo.Name = "btn_search_moreInfo";
-            this.btn_search_moreInfo.Size = new System.Drawing.Size(75, 23);
-            this.btn_search_moreInfo.TabIndex = 3;
-            this.btn_search_moreInfo.Text = "More info";
-            this.btn_search_moreInfo.UseVisualStyleBackColor = true;
-            this.btn_search_moreInfo.Click += new System.EventHandler(this.btn_search_moreInfo_Click);
             // 
             // btn_search_sendTo
             // 
@@ -254,6 +217,43 @@
             this.btn_search_sendTo.UseVisualStyleBackColor = true;
             this.btn_search_sendTo.Click += new System.EventHandler(this.btn_search_sendTo_Click);
             // 
+            // btn_search_moreInfo
+            // 
+            this.btn_search_moreInfo.Enabled = false;
+            this.btn_search_moreInfo.Location = new System.Drawing.Point(12, 178);
+            this.btn_search_moreInfo.Name = "btn_search_moreInfo";
+            this.btn_search_moreInfo.Size = new System.Drawing.Size(75, 23);
+            this.btn_search_moreInfo.TabIndex = 3;
+            this.btn_search_moreInfo.Text = "More info";
+            this.btn_search_moreInfo.UseVisualStyleBackColor = true;
+            this.btn_search_moreInfo.Click += new System.EventHandler(this.btn_search_moreInfo_Click);
+            // 
+            // lbox_search_result
+            // 
+            this.lbox_search_result.FormattingEnabled = true;
+            this.lbox_search_result.Location = new System.Drawing.Point(10, 67);
+            this.lbox_search_result.Name = "lbox_search_result";
+            this.lbox_search_result.Size = new System.Drawing.Size(656, 95);
+            this.lbox_search_result.TabIndex = 2;
+            this.lbox_search_result.SelectedIndexChanged += new System.EventHandler(this.lbox_search_result_SelectedIndexChanged);
+            // 
+            // txt_Search_searchString
+            // 
+            this.txt_Search_searchString.Location = new System.Drawing.Point(83, 14);
+            this.txt_Search_searchString.Name = "txt_Search_searchString";
+            this.txt_Search_searchString.Size = new System.Drawing.Size(247, 20);
+            this.txt_Search_searchString.TabIndex = 1;
+            this.txt_Search_searchString.TextChanged += new System.EventHandler(this.txt_Search_searchString_TextChanged);
+            // 
+            // lbl_Search_searchString
+            // 
+            this.lbl_Search_searchString.AutoSize = true;
+            this.lbl_Search_searchString.Location = new System.Drawing.Point(7, 17);
+            this.lbl_Search_searchString.Name = "lbl_Search_searchString";
+            this.lbl_Search_searchString.Size = new System.Drawing.Size(70, 13);
+            this.lbl_Search_searchString.TabIndex = 0;
+            this.lbl_Search_searchString.Text = "Search query";
+            // 
             // TabPanel
             // 
             this.TabPanel.Controls.Add(this.TP_Identify);
@@ -264,31 +264,6 @@
             this.TabPanel.SelectedIndex = 0;
             this.TabPanel.Size = new System.Drawing.Size(681, 263);
             this.TabPanel.TabIndex = 3;
-            // 
-            // btnIdentify
-            // 
-            this.btnIdentify.Location = new System.Drawing.Point(158, 16);
-            this.btnIdentify.Name = "btnIdentify";
-            this.btnIdentify.Size = new System.Drawing.Size(75, 23);
-            this.btnIdentify.TabIndex = 2;
-            this.btnIdentify.Text = "Identify";
-            this.btnIdentify.UseVisualStyleBackColor = true;
-            this.btnIdentify.Click += new System.EventHandler(this.btnIdentify_Click);
-            // 
-            // txt_identify_ssn
-            // 
-            this.txt_identify_ssn.Location = new System.Drawing.Point(12, 16);
-            this.txt_identify_ssn.Name = "txt_identify_ssn";
-            this.txt_identify_ssn.Size = new System.Drawing.Size(100, 20);
-            this.txt_identify_ssn.TabIndex = 1;
-            // 
-            // lbl_Identify_ssn
-            // 
-            this.lbl_Identify_ssn.AutoSize = true;
-            this.lbl_Identify_ssn.Location = new System.Drawing.Point(6, 19);
-            this.lbl_Identify_ssn.Name = "lbl_Identify_ssn";
-            this.lbl_Identify_ssn.Size = new System.Drawing.Size(0, 13);
-            this.lbl_Identify_ssn.TabIndex = 0;
             // 
             // TP_Identify
             // 
@@ -302,6 +277,31 @@
             this.TP_Identify.TabIndex = 0;
             this.TP_Identify.Text = "Identify";
             this.TP_Identify.UseVisualStyleBackColor = true;
+            // 
+            // lbl_Identify_ssn
+            // 
+            this.lbl_Identify_ssn.AutoSize = true;
+            this.lbl_Identify_ssn.Location = new System.Drawing.Point(6, 19);
+            this.lbl_Identify_ssn.Name = "lbl_Identify_ssn";
+            this.lbl_Identify_ssn.Size = new System.Drawing.Size(0, 13);
+            this.lbl_Identify_ssn.TabIndex = 0;
+            // 
+            // txt_identify_ssn
+            // 
+            this.txt_identify_ssn.Location = new System.Drawing.Point(12, 16);
+            this.txt_identify_ssn.Name = "txt_identify_ssn";
+            this.txt_identify_ssn.Size = new System.Drawing.Size(100, 20);
+            this.txt_identify_ssn.TabIndex = 1;
+            // 
+            // btnIdentify
+            // 
+            this.btnIdentify.Location = new System.Drawing.Point(158, 16);
+            this.btnIdentify.Name = "btnIdentify";
+            this.btnIdentify.Size = new System.Drawing.Size(75, 23);
+            this.btnIdentify.TabIndex = 2;
+            this.btnIdentify.Text = "Identify";
+            this.btnIdentify.UseVisualStyleBackColor = true;
+            this.btnIdentify.Click += new System.EventHandler(this.btnIdentify_Click);
             // 
             // btnConfig
             // 

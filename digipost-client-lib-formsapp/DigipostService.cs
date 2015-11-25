@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Digipost.Api.Client;
 using Digipost.Api.Client.Api;
@@ -6,11 +7,14 @@ using Digipost.Api.Client.Domain.Enums;
 using Digipost.Api.Client.Domain.Identify;
 using Digipost.Api.Client.Domain.Search;
 using Digipost.Api.Client.Domain.SendMessage;
+using log4net;
+using log4net.Config;
 
 namespace digipost_client_lib_formsapp
 {
     public class DigipostService
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static DigipostClient _digipostClient;
         private readonly string _senderId;
         private readonly string _thumbprint;
@@ -23,6 +27,7 @@ namespace digipost_client_lib_formsapp
             _thumbprint = thumbprint;
             _url = url;
             _timeout = timeout;
+            XmlConfigurator.Configure();
         }
 
         public virtual async Task<IIdentificationResult> Identify(Identification identification)
@@ -50,7 +55,7 @@ namespace digipost_client_lib_formsapp
                 primaryDocument.SmsNotification = smsNotification;
 
             var m = new Message(recipient, primaryDocument);
-
+           
             return await GetClient().SendMessageAsync(m);
         }
 
@@ -80,11 +85,12 @@ namespace digipost_client_lib_formsapp
 
         private DigipostClient InitClient()
         {
+            
             var config = new ClientConfig(_senderId, _url, _timeout, false)
             {
                 Logger = (severity, traceId, metode, message) =>
                 {
-                    //no logging
+                     Log.Debug(string.Format("severity:{0} traceId:{1} metode:{2} message:{3}", severity, traceId, metode, message));
                 }
             };
             _digipostClient = new DigipostClient(config, _thumbprint);

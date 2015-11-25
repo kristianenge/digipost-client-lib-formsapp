@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using log4net.Repository.Hierarchy;
 
 namespace digipost_client_lib_formsapp
 {
@@ -20,7 +21,7 @@ namespace digipost_client_lib_formsapp
         private string _technicalId;
         private string _thumbprint;
         private string _url;
-
+        private readonly object _lockObject = new object();
         private DigipostService _digipostService;
         public DigipostForm()
         {
@@ -60,7 +61,7 @@ namespace digipost_client_lib_formsapp
         }
 
         #region Config
-      
+
 
         private void btnConfig_Click(object sender, EventArgs e)
         {
@@ -72,7 +73,7 @@ namespace digipost_client_lib_formsapp
         private void ExtractConfigFromForm(object sender, CancelEventArgs e)
         {
             var configForm = (Form)sender;
-            foreach (var texBoxController in configForm.Controls.Cast<object>().Where(control => control.GetType() == typeof (TextBox)).Cast<TextBox>())
+            foreach (var texBoxController in configForm.Controls.Cast<object>().Where(control => control.GetType() == typeof(TextBox)).Cast<TextBox>())
             {
                 switch (texBoxController.Name)
                 {
@@ -122,12 +123,19 @@ namespace digipost_client_lib_formsapp
 
         private async void txt_Search_searchString_TextChanged(object sender, EventArgs e)
         {
-            lbox_search_result.Items.Clear();
+            
             try
             {
                 var result = await _digipostService.Search(txt_Search_searchString.Text);
-                AppendResponse("Search[" + txt_Search_searchString.Text + "]: count[" + result.PersonDetails.Count + "]");
-                lbox_search_result.Items.AddRange(result.PersonDetails.ToArray());
+                lock (_lockObject)
+                {
+                    lbox_search_result.Items.Clear();
+                    AppendResponse("Search[" + txt_Search_searchString.Text + "]: count[" + result.PersonDetails.Count + "]");
+                    foreach (var personDetail in result.PersonDetails)
+                    {
+                        lbox_search_result.Items.Add(personDetail);
+                    }
+                }
             }
             catch (ClientResponseException cre)
             {
@@ -198,7 +206,8 @@ namespace digipost_client_lib_formsapp
             try
             {
                 var response = await _digipostService.Send(file, fileType, subject, identification, identificationValue);
-                AppendResponse("Send: Status: " + response.Status + ", DeliveryMethod: " + response.DeliveryMethod);
+
+                AppendResponse("Send: Status: " + response.Status + ", DeliveryMethod: " + response.DeliveryMethod + ", documentGuid:" + response.PrimaryDocument.Guid + ", DeliveryTime" + response.DeliveryTime);
                 ResetSendView();
             }
             catch (ClientResponseException cre)
@@ -230,7 +239,7 @@ namespace digipost_client_lib_formsapp
             btn_send_send.Enabled = (!string.IsNullOrEmpty(txt_send_digipostAddress.Text)) &&
                                     !string.IsNullOrEmpty(txt_send_file.Text) || !string.IsNullOrEmpty(ExtractedHtmlContent);
         }
-        
+
         private void btn_send_createDocument_Click(object sender, EventArgs e)
         {
             var editor = new Editor();
@@ -248,8 +257,8 @@ namespace digipost_client_lib_formsapp
             ActivateSendButton();
         }
 
+
         #endregion
 
-        
     }
 }
