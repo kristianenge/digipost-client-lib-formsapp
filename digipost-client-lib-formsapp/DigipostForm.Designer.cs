@@ -33,6 +33,25 @@
             this.lbl_response_info = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.TP_Send = new System.Windows.Forms.TabPage();
+            this.gbSendPrint = new System.Windows.Forms.GroupBox();
+            this.lblSendPrintFrom = new System.Windows.Forms.Label();
+            this.lblSendPrintTO = new System.Windows.Forms.Label();
+            this.lblSendPrintCity_Ret = new System.Windows.Forms.Label();
+            this.lblSendPrintPostalCode_Ret = new System.Windows.Forms.Label();
+            this.lblSendPrintAddress_Ret = new System.Windows.Forms.Label();
+            this.txtSendPrintCity_Ret = new System.Windows.Forms.TextBox();
+            this.txtSendPrintPostalCode_Ret = new System.Windows.Forms.TextBox();
+            this.txtSendPrintAddress_Ret = new System.Windows.Forms.TextBox();
+            this.txtSendPrintFullName_ret = new System.Windows.Forms.TextBox();
+            this.lblSendPrintFullName_Ret = new System.Windows.Forms.Label();
+            this.lblSendPrintCity = new System.Windows.Forms.Label();
+            this.lblSendPrintPostalCode = new System.Windows.Forms.Label();
+            this.lblSendPrint_Address = new System.Windows.Forms.Label();
+            this.txtSendPrintCity = new System.Windows.Forms.TextBox();
+            this.txtSendPrintPostalCode = new System.Windows.Forms.TextBox();
+            this.txtSendPrintAddress = new System.Windows.Forms.TextBox();
+            this.txtSendPrintFullName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.comboId = new System.Windows.Forms.ComboBox();
             this.btn_send_createDocument = new System.Windows.Forms.Button();
             this.txt_send_file = new System.Windows.Forms.TextBox();
@@ -42,6 +61,7 @@
             this.lbl_send_subject = new System.Windows.Forms.Label();
             this.btn_send_send = new System.Windows.Forms.Button();
             this.btn_send_selectFile = new System.Windows.Forms.Button();
+            this.cbSendPrint = new System.Windows.Forms.CheckBox();
             this.TP_Search = new System.Windows.Forms.TabPage();
             this.btn_search_sendTo = new System.Windows.Forms.Button();
             this.btn_search_moreInfo = new System.Windows.Forms.Button();
@@ -50,12 +70,14 @@
             this.lbl_Search_searchString = new System.Windows.Forms.Label();
             this.TabPanel = new System.Windows.Forms.TabControl();
             this.TP_Identify = new System.Windows.Forms.TabPage();
+            this.comboBoxIdentify = new System.Windows.Forms.ComboBox();
             this.lbl_Identify_ssn = new System.Windows.Forms.Label();
             this.txt_identify_ssn = new System.Windows.Forms.TextBox();
             this.btnIdentify = new System.Windows.Forms.Button();
             this.btnConfig = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.TP_Send.SuspendLayout();
+            this.gbSendPrint.SuspendLayout();
             this.TP_Search.SuspendLayout();
             this.TabPanel.SuspendLayout();
             this.TP_Identify.SuspendLayout();
@@ -94,6 +116,8 @@
             // 
             // TP_Send
             // 
+            this.TP_Send.Controls.Add(this.cbSendPrint);
+            this.TP_Send.Controls.Add(this.gbSendPrint);
             this.TP_Send.Controls.Add(this.comboId);
             this.TP_Send.Controls.Add(this.btn_send_createDocument);
             this.TP_Send.Controls.Add(this.txt_send_file);
@@ -105,10 +129,184 @@
             this.TP_Send.Controls.Add(this.btn_send_selectFile);
             this.TP_Send.Location = new System.Drawing.Point(4, 22);
             this.TP_Send.Name = "TP_Send";
-            this.TP_Send.Size = new System.Drawing.Size(673, 237);
+            this.TP_Send.Size = new System.Drawing.Size(673, 259);
             this.TP_Send.TabIndex = 2;
             this.TP_Send.Text = "Send";
             this.TP_Send.UseVisualStyleBackColor = true;
+            // 
+            // gbSendPrint
+            // 
+            this.gbSendPrint.Controls.Add(this.lblSendPrintFrom);
+            this.gbSendPrint.Controls.Add(this.lblSendPrintTO);
+            this.gbSendPrint.Controls.Add(this.lblSendPrintCity_Ret);
+            this.gbSendPrint.Controls.Add(this.lblSendPrintPostalCode_Ret);
+            this.gbSendPrint.Controls.Add(this.lblSendPrintAddress_Ret);
+            this.gbSendPrint.Controls.Add(this.txtSendPrintCity_Ret);
+            this.gbSendPrint.Controls.Add(this.txtSendPrintPostalCode_Ret);
+            this.gbSendPrint.Controls.Add(this.txtSendPrintAddress_Ret);
+            this.gbSendPrint.Controls.Add(this.txtSendPrintFullName_ret);
+            this.gbSendPrint.Controls.Add(this.lblSendPrintFullName_Ret);
+            this.gbSendPrint.Controls.Add(this.lblSendPrintCity);
+            this.gbSendPrint.Controls.Add(this.lblSendPrintPostalCode);
+            this.gbSendPrint.Controls.Add(this.lblSendPrint_Address);
+            this.gbSendPrint.Controls.Add(this.txtSendPrintCity);
+            this.gbSendPrint.Controls.Add(this.txtSendPrintPostalCode);
+            this.gbSendPrint.Controls.Add(this.txtSendPrintAddress);
+            this.gbSendPrint.Controls.Add(this.txtSendPrintFullName);
+            this.gbSendPrint.Controls.Add(this.label1);
+            this.gbSendPrint.Enabled = false;
+            this.gbSendPrint.Location = new System.Drawing.Point(15, 87);
+            this.gbSendPrint.Name = "gbSendPrint";
+            this.gbSendPrint.Size = new System.Drawing.Size(527, 169);
+            this.gbSendPrint.TabIndex = 10;
+            this.gbSendPrint.TabStop = false;
+            this.gbSendPrint.Text = "        Print";
+            // 
+            // lblSendPrintFrom
+            // 
+            this.lblSendPrintFrom.AutoSize = true;
+            this.lblSendPrintFrom.Location = new System.Drawing.Point(345, 20);
+            this.lblSendPrintFrom.Name = "lblSendPrintFrom";
+            this.lblSendPrintFrom.Size = new System.Drawing.Size(33, 13);
+            this.lblSendPrintFrom.TabIndex = 17;
+            this.lblSendPrintFrom.Text = "From:";
+            // 
+            // lblSendPrintTO
+            // 
+            this.lblSendPrintTO.AutoSize = true;
+            this.lblSendPrintTO.Location = new System.Drawing.Point(16, 20);
+            this.lblSendPrintTO.Name = "lblSendPrintTO";
+            this.lblSendPrintTO.Size = new System.Drawing.Size(23, 13);
+            this.lblSendPrintTO.TabIndex = 16;
+            this.lblSendPrintTO.Text = "To:";
+            // 
+            // lblSendPrintCity_Ret
+            // 
+            this.lblSendPrintCity_Ret.AutoSize = true;
+            this.lblSendPrintCity_Ret.Location = new System.Drawing.Point(342, 126);
+            this.lblSendPrintCity_Ret.Name = "lblSendPrintCity_Ret";
+            this.lblSendPrintCity_Ret.Size = new System.Drawing.Size(24, 13);
+            this.lblSendPrintCity_Ret.TabIndex = 15;
+            this.lblSendPrintCity_Ret.Text = "City";
+            // 
+            // lblSendPrintPostalCode_Ret
+            // 
+            this.lblSendPrintPostalCode_Ret.AutoSize = true;
+            this.lblSendPrintPostalCode_Ret.Location = new System.Drawing.Point(342, 100);
+            this.lblSendPrintPostalCode_Ret.Name = "lblSendPrintPostalCode_Ret";
+            this.lblSendPrintPostalCode_Ret.Size = new System.Drawing.Size(63, 13);
+            this.lblSendPrintPostalCode_Ret.TabIndex = 14;
+            this.lblSendPrintPostalCode_Ret.Text = "Postal code";
+            // 
+            // lblSendPrintAddress_Ret
+            // 
+            this.lblSendPrintAddress_Ret.AutoSize = true;
+            this.lblSendPrintAddress_Ret.Location = new System.Drawing.Point(342, 74);
+            this.lblSendPrintAddress_Ret.Name = "lblSendPrintAddress_Ret";
+            this.lblSendPrintAddress_Ret.Size = new System.Drawing.Size(45, 13);
+            this.lblSendPrintAddress_Ret.TabIndex = 13;
+            this.lblSendPrintAddress_Ret.Text = "Address";
+            // 
+            // txtSendPrintCity_Ret
+            // 
+            this.txtSendPrintCity_Ret.Location = new System.Drawing.Point(408, 119);
+            this.txtSendPrintCity_Ret.Name = "txtSendPrintCity_Ret";
+            this.txtSendPrintCity_Ret.Size = new System.Drawing.Size(100, 20);
+            this.txtSendPrintCity_Ret.TabIndex = 12;
+            // 
+            // txtSendPrintPostalCode_Ret
+            // 
+            this.txtSendPrintPostalCode_Ret.Location = new System.Drawing.Point(408, 93);
+            this.txtSendPrintPostalCode_Ret.Name = "txtSendPrintPostalCode_Ret";
+            this.txtSendPrintPostalCode_Ret.Size = new System.Drawing.Size(100, 20);
+            this.txtSendPrintPostalCode_Ret.TabIndex = 11;
+            // 
+            // txtSendPrintAddress_Ret
+            // 
+            this.txtSendPrintAddress_Ret.Location = new System.Drawing.Point(408, 67);
+            this.txtSendPrintAddress_Ret.Name = "txtSendPrintAddress_Ret";
+            this.txtSendPrintAddress_Ret.Size = new System.Drawing.Size(100, 20);
+            this.txtSendPrintAddress_Ret.TabIndex = 10;
+            // 
+            // txtSendPrintFullName_ret
+            // 
+            this.txtSendPrintFullName_ret.Location = new System.Drawing.Point(408, 41);
+            this.txtSendPrintFullName_ret.Name = "txtSendPrintFullName_ret";
+            this.txtSendPrintFullName_ret.Size = new System.Drawing.Size(100, 20);
+            this.txtSendPrintFullName_ret.TabIndex = 9;
+            // 
+            // lblSendPrintFullName_Ret
+            // 
+            this.lblSendPrintFullName_Ret.AutoSize = true;
+            this.lblSendPrintFullName_Ret.Location = new System.Drawing.Point(342, 48);
+            this.lblSendPrintFullName_Ret.Name = "lblSendPrintFullName_Ret";
+            this.lblSendPrintFullName_Ret.Size = new System.Drawing.Size(52, 13);
+            this.lblSendPrintFullName_Ret.TabIndex = 8;
+            this.lblSendPrintFullName_Ret.Text = "Full name";
+            // 
+            // lblSendPrintCity
+            // 
+            this.lblSendPrintCity.AutoSize = true;
+            this.lblSendPrintCity.Location = new System.Drawing.Point(13, 126);
+            this.lblSendPrintCity.Name = "lblSendPrintCity";
+            this.lblSendPrintCity.Size = new System.Drawing.Size(24, 13);
+            this.lblSendPrintCity.TabIndex = 7;
+            this.lblSendPrintCity.Text = "City";
+            // 
+            // lblSendPrintPostalCode
+            // 
+            this.lblSendPrintPostalCode.AutoSize = true;
+            this.lblSendPrintPostalCode.Location = new System.Drawing.Point(13, 100);
+            this.lblSendPrintPostalCode.Name = "lblSendPrintPostalCode";
+            this.lblSendPrintPostalCode.Size = new System.Drawing.Size(63, 13);
+            this.lblSendPrintPostalCode.TabIndex = 6;
+            this.lblSendPrintPostalCode.Text = "Postal code";
+            // 
+            // lblSendPrint_Address
+            // 
+            this.lblSendPrint_Address.AutoSize = true;
+            this.lblSendPrint_Address.Location = new System.Drawing.Point(13, 74);
+            this.lblSendPrint_Address.Name = "lblSendPrint_Address";
+            this.lblSendPrint_Address.Size = new System.Drawing.Size(45, 13);
+            this.lblSendPrint_Address.TabIndex = 5;
+            this.lblSendPrint_Address.Text = "Address";
+            // 
+            // txtSendPrintCity
+            // 
+            this.txtSendPrintCity.Location = new System.Drawing.Point(79, 119);
+            this.txtSendPrintCity.Name = "txtSendPrintCity";
+            this.txtSendPrintCity.Size = new System.Drawing.Size(100, 20);
+            this.txtSendPrintCity.TabIndex = 4;
+            // 
+            // txtSendPrintPostalCode
+            // 
+            this.txtSendPrintPostalCode.Location = new System.Drawing.Point(79, 93);
+            this.txtSendPrintPostalCode.Name = "txtSendPrintPostalCode";
+            this.txtSendPrintPostalCode.Size = new System.Drawing.Size(100, 20);
+            this.txtSendPrintPostalCode.TabIndex = 3;
+            // 
+            // txtSendPrintAddress
+            // 
+            this.txtSendPrintAddress.Location = new System.Drawing.Point(79, 67);
+            this.txtSendPrintAddress.Name = "txtSendPrintAddress";
+            this.txtSendPrintAddress.Size = new System.Drawing.Size(100, 20);
+            this.txtSendPrintAddress.TabIndex = 2;
+            // 
+            // txtSendPrintFullName
+            // 
+            this.txtSendPrintFullName.Location = new System.Drawing.Point(79, 41);
+            this.txtSendPrintFullName.Name = "txtSendPrintFullName";
+            this.txtSendPrintFullName.Size = new System.Drawing.Size(100, 20);
+            this.txtSendPrintFullName.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Full name";
             // 
             // comboId
             // 
@@ -120,7 +318,7 @@
             // 
             // btn_send_createDocument
             // 
-            this.btn_send_createDocument.Location = new System.Drawing.Point(333, 97);
+            this.btn_send_createDocument.Location = new System.Drawing.Point(357, 58);
             this.btn_send_createDocument.Name = "btn_send_createDocument";
             this.btn_send_createDocument.Size = new System.Drawing.Size(97, 23);
             this.btn_send_createDocument.TabIndex = 8;
@@ -130,7 +328,7 @@
             // 
             // txt_send_file
             // 
-            this.txt_send_file.Location = new System.Drawing.Point(107, 101);
+            this.txt_send_file.Location = new System.Drawing.Point(130, 62);
             this.txt_send_file.Name = "txt_send_file";
             this.txt_send_file.ReadOnly = true;
             this.txt_send_file.Size = new System.Drawing.Size(76, 20);
@@ -139,7 +337,7 @@
             // 
             // txt_send_subject
             // 
-            this.txt_send_subject.Location = new System.Drawing.Point(107, 38);
+            this.txt_send_subject.Location = new System.Drawing.Point(130, 36);
             this.txt_send_subject.Name = "txt_send_subject";
             this.txt_send_subject.Size = new System.Drawing.Size(208, 20);
             this.txt_send_subject.TabIndex = 5;
@@ -155,7 +353,7 @@
             // lbl_send_file
             // 
             this.lbl_send_file.AutoSize = true;
-            this.lbl_send_file.Location = new System.Drawing.Point(15, 107);
+            this.lbl_send_file.Location = new System.Drawing.Point(101, 68);
             this.lbl_send_file.Name = "lbl_send_file";
             this.lbl_send_file.Size = new System.Drawing.Size(23, 13);
             this.lbl_send_file.TabIndex = 6;
@@ -164,7 +362,7 @@
             // lbl_send_subject
             // 
             this.lbl_send_subject.AutoSize = true;
-            this.lbl_send_subject.Location = new System.Drawing.Point(12, 38);
+            this.lbl_send_subject.Location = new System.Drawing.Point(81, 43);
             this.lbl_send_subject.Name = "lbl_send_subject";
             this.lbl_send_subject.Size = new System.Drawing.Size(43, 13);
             this.lbl_send_subject.TabIndex = 4;
@@ -173,7 +371,7 @@
             // btn_send_send
             // 
             this.btn_send_send.Enabled = false;
-            this.btn_send_send.Location = new System.Drawing.Point(15, 137);
+            this.btn_send_send.Location = new System.Drawing.Point(591, 211);
             this.btn_send_send.Name = "btn_send_send";
             this.btn_send_send.Size = new System.Drawing.Size(75, 23);
             this.btn_send_send.TabIndex = 3;
@@ -183,13 +381,23 @@
             // 
             // btn_send_selectFile
             // 
-            this.btn_send_selectFile.Location = new System.Drawing.Point(201, 98);
+            this.btn_send_selectFile.Location = new System.Drawing.Point(225, 59);
             this.btn_send_selectFile.Name = "btn_send_selectFile";
             this.btn_send_selectFile.Size = new System.Drawing.Size(126, 23);
             this.btn_send_selectFile.TabIndex = 2;
             this.btn_send_selectFile.Text = "Select file to send";
             this.btn_send_selectFile.UseVisualStyleBackColor = true;
             this.btn_send_selectFile.Click += new System.EventHandler(this.btn_send_selectFile_Click);
+            // 
+            // cbSendPrint
+            // 
+            this.cbSendPrint.AutoSize = true;
+            this.cbSendPrint.Location = new System.Drawing.Point(31, 87);
+            this.cbSendPrint.Name = "cbSendPrint";
+            this.cbSendPrint.Size = new System.Drawing.Size(15, 14);
+            this.cbSendPrint.TabIndex = 18;
+            this.cbSendPrint.UseVisualStyleBackColor = true;
+            this.cbSendPrint.CheckedChanged += new System.EventHandler(this.cbSendPrint_CheckedChanged);
             // 
             // TP_Search
             // 
@@ -201,7 +409,7 @@
             this.TP_Search.Location = new System.Drawing.Point(4, 22);
             this.TP_Search.Name = "TP_Search";
             this.TP_Search.Padding = new System.Windows.Forms.Padding(3);
-            this.TP_Search.Size = new System.Drawing.Size(673, 237);
+            this.TP_Search.Size = new System.Drawing.Size(673, 259);
             this.TP_Search.TabIndex = 1;
             this.TP_Search.Text = "Search";
             this.TP_Search.UseVisualStyleBackColor = true;
@@ -262,21 +470,30 @@
             this.TabPanel.Location = new System.Drawing.Point(2, 0);
             this.TabPanel.Name = "TabPanel";
             this.TabPanel.SelectedIndex = 0;
-            this.TabPanel.Size = new System.Drawing.Size(681, 263);
+            this.TabPanel.Size = new System.Drawing.Size(681, 285);
             this.TabPanel.TabIndex = 3;
             // 
             // TP_Identify
             // 
+            this.TP_Identify.Controls.Add(this.comboBoxIdentify);
             this.TP_Identify.Controls.Add(this.lbl_Identify_ssn);
             this.TP_Identify.Controls.Add(this.txt_identify_ssn);
             this.TP_Identify.Controls.Add(this.btnIdentify);
             this.TP_Identify.Location = new System.Drawing.Point(4, 22);
             this.TP_Identify.Name = "TP_Identify";
             this.TP_Identify.Padding = new System.Windows.Forms.Padding(3);
-            this.TP_Identify.Size = new System.Drawing.Size(673, 237);
+            this.TP_Identify.Size = new System.Drawing.Size(673, 259);
             this.TP_Identify.TabIndex = 0;
             this.TP_Identify.Text = "Identify";
             this.TP_Identify.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxIdentify
+            // 
+            this.comboBoxIdentify.FormattingEnabled = true;
+            this.comboBoxIdentify.Location = new System.Drawing.Point(12, 17);
+            this.comboBoxIdentify.Name = "comboBoxIdentify";
+            this.comboBoxIdentify.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxIdentify.TabIndex = 3;
             // 
             // lbl_Identify_ssn
             // 
@@ -288,14 +505,14 @@
             // 
             // txt_identify_ssn
             // 
-            this.txt_identify_ssn.Location = new System.Drawing.Point(12, 16);
+            this.txt_identify_ssn.Location = new System.Drawing.Point(139, 18);
             this.txt_identify_ssn.Name = "txt_identify_ssn";
             this.txt_identify_ssn.Size = new System.Drawing.Size(100, 20);
             this.txt_identify_ssn.TabIndex = 1;
             // 
             // btnIdentify
             // 
-            this.btnIdentify.Location = new System.Drawing.Point(158, 16);
+            this.btnIdentify.Location = new System.Drawing.Point(245, 17);
             this.btnIdentify.Name = "btnIdentify";
             this.btnIdentify.Size = new System.Drawing.Size(75, 23);
             this.btnIdentify.TabIndex = 2;
@@ -327,6 +544,8 @@
             this.panel1.PerformLayout();
             this.TP_Send.ResumeLayout(false);
             this.TP_Send.PerformLayout();
+            this.gbSendPrint.ResumeLayout(false);
+            this.gbSendPrint.PerformLayout();
             this.TP_Search.ResumeLayout(false);
             this.TP_Search.PerformLayout();
             this.TabPanel.ResumeLayout(false);
@@ -363,5 +582,26 @@
         private System.Windows.Forms.TextBox txt_identify_ssn;
         private System.Windows.Forms.Button btnIdentify;
         private System.Windows.Forms.Button btnConfig;
+        private System.Windows.Forms.ComboBox comboBoxIdentify;
+        private System.Windows.Forms.GroupBox gbSendPrint;
+        private System.Windows.Forms.CheckBox cbSendPrint;
+        private System.Windows.Forms.Label lblSendPrintFrom;
+        private System.Windows.Forms.Label lblSendPrintTO;
+        private System.Windows.Forms.Label lblSendPrintCity_Ret;
+        private System.Windows.Forms.Label lblSendPrintPostalCode_Ret;
+        private System.Windows.Forms.Label lblSendPrintAddress_Ret;
+        private System.Windows.Forms.TextBox txtSendPrintCity_Ret;
+        private System.Windows.Forms.TextBox txtSendPrintPostalCode_Ret;
+        private System.Windows.Forms.TextBox txtSendPrintAddress_Ret;
+        private System.Windows.Forms.TextBox txtSendPrintFullName_ret;
+        private System.Windows.Forms.Label lblSendPrintFullName_Ret;
+        private System.Windows.Forms.Label lblSendPrintCity;
+        private System.Windows.Forms.Label lblSendPrintPostalCode;
+        private System.Windows.Forms.Label lblSendPrint_Address;
+        private System.Windows.Forms.TextBox txtSendPrintCity;
+        private System.Windows.Forms.TextBox txtSendPrintPostalCode;
+        private System.Windows.Forms.TextBox txtSendPrintAddress;
+        private System.Windows.Forms.TextBox txtSendPrintFullName;
+        private System.Windows.Forms.Label label1;
     }
 }

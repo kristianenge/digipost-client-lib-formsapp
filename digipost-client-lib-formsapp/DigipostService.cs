@@ -5,6 +5,7 @@ using Digipost.Api.Client;
 using Digipost.Api.Client.Api;
 using Digipost.Api.Client.Domain.Enums;
 using Digipost.Api.Client.Domain.Identify;
+using Digipost.Api.Client.Domain.Print;
 using Digipost.Api.Client.Domain.Search;
 using Digipost.Api.Client.Domain.SendMessage;
 using log4net;
@@ -42,7 +43,7 @@ namespace digipost_client_lib_formsapp
 
         public virtual async Task<IMessageDeliveryResult> Send(byte[] fileContent, string filetype, string subject,IdentificationType identification,
             string identificationValue, SensitivityLevel sensitivity = SensitivityLevel.Normal,
-            AuthenticationLevel authentication = AuthenticationLevel.Password, SmsNotification smsNotification = null)
+            AuthenticationLevel authentication = AuthenticationLevel.Password, SmsNotification smsNotification = null,PrintDetails printDetails= null)
         {
             var recipient = new RecipientById(identification, identificationValue);
 
@@ -53,31 +54,16 @@ namespace digipost_client_lib_formsapp
             };
             if (smsNotification != null)
                 primaryDocument.SmsNotification = smsNotification;
-
+            
             var m = new Message(recipient, primaryDocument);
-           
-            return await GetClient().SendMessageAsync(m);
-        }
 
-        public virtual async Task<IMessageDeliveryResult> Send(Stream fileContent, string filetype, string subject,
-           string digipostAddress, SensitivityLevel sensitivity = SensitivityLevel.Normal,
-           AuthenticationLevel authentication = AuthenticationLevel.Password, SmsNotification smsNotification = null)
-        {
-            var recipient = new RecipientById(IdentificationType.DigipostAddress, digipostAddress);
+            if (printDetails != null)
+                m.PrintDetails = printDetails;
 
-            var primaryDocument = new Document(subject, filetype, fileContent)
-            {
-                SensitivityLevel = sensitivity,
-                AuthenticationLevel = authentication
-            };
-            if (smsNotification != null)
-                primaryDocument.SmsNotification = smsNotification;
-
-            var m = new Message(recipient, primaryDocument);
 
             return await GetClient().SendMessageAsync(m);
         }
-
+        
         private DigipostClient GetClient()
         {
             return _digipostClient ?? InitClient();

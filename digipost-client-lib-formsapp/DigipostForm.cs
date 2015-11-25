@@ -1,28 +1,29 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using digipost_client_lib_formsapp.Properties;
 using Digipost.Api.Client.Domain.Enums;
 using Digipost.Api.Client.Domain.Exceptions;
 using Digipost.Api.Client.Domain.Identify;
+using Digipost.Api.Client.Domain.Print;
 using Digipost.Api.Client.Domain.Search;
 using Digipost.Api.Client.Domain.SendMessage;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using log4net.Repository.Hierarchy;
 
 namespace digipost_client_lib_formsapp
 {
     public partial class DigipostForm : Form
     {
+        private readonly object _lockObject = new object();
+        private DigipostService _digipostService;
         private string _technicalId;
         private string _thumbprint;
         private string _url;
-        private readonly object _lockObject = new object();
-        private DigipostService _digipostService;
+
         public DigipostForm()
         {
             InitializeComponent();
@@ -30,6 +31,7 @@ namespace digipost_client_lib_formsapp
             InitDropDownlists();
             InitConfig();
         }
+
         private void InitConfig()
         {
             var config = new Config();
@@ -37,31 +39,61 @@ namespace digipost_client_lib_formsapp
             config.Show();
             config.Close();
         }
+
         private void InitDropDownlists()
         {
-            foreach (var id in Enum.GetValues(typeof(IdentificationType)))
+            foreach (var id in Enum.GetValues(typeof (IdentificationType)))
             {
                 comboId.Items.Add(id);
+                comboBoxIdentify.Items.Add(id);
             }
         }
+
         private void InitDigipostService()
         {
             var timeout = Settings.Default.timeoutInMs;
             _digipostService = new DigipostService(_technicalId, _thumbprint,
                 _url, timeout);
         }
+
         private void AppendResponse(string text)
         {
             rtf_response_text.AppendText(text + Environment.NewLine);
             rtf_response_text.ScrollToCaret();
         }
+
         private void DigipostForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.Default.Save();
         }
 
-        #region Config
+        #region Identify
 
+        private async void btnIdentify_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = await _digipostService.Identify(
+                    new Identification(new RecipientById((IdentificationType) comboBoxIdentify.SelectedItem,
+                        txt_identify_ssn.Text)));
+                AppendResponse("Identify: Data: " + result.Data + ", ResultType: " + result.ResultType + ", Error: " +
+                               result.Error);
+            }
+            catch (ClientResponseException cre)
+            {
+                var message = cre.InnerException?.Message ?? cre.Error.ToString();
+                AppendResponse("Identify: Status:" + message);
+            }
+            catch (XmlException xe)
+            {
+                var message = xe.InnerException?.Message ?? xe.Message;
+                AppendResponse("Identify: Status:" + message);
+            }
+        }
+
+        #endregion
+
+        #region Config
 
         private void btnConfig_Click(object sender, EventArgs e)
         {
@@ -72,8 +104,12 @@ namespace digipost_client_lib_formsapp
 
         private void ExtractConfigFromForm(object sender, CancelEventArgs e)
         {
-            var configForm = (Form)sender;
-            foreach (var texBoxController in configForm.Controls.Cast<object>().Where(control => control.GetType() == typeof(TextBox)).Cast<TextBox>())
+            var configForm = (Form) sender;
+            foreach (
+                var texBoxController in
+                    configForm.Controls.Cast<object>()
+                        .Where(control => control.GetType() == typeof (TextBox))
+                        .Cast<TextBox>())
             {
                 switch (texBoxController.Name)
                 {
@@ -93,44 +129,18 @@ namespace digipost_client_lib_formsapp
 
         #endregion
 
-        #region Identify
-        private async void btnIdentify_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var result = await _digipostService.Identify(
-                    new Identification(new RecipientById(IdentificationType.PersonalIdentificationNumber,
-                        txt_identify_ssn.Text)));
-                AppendResponse("Identify: Data: " + result.Data + ", ResultType: " + result.ResultType + ", Error: " +
-                               result.Error);
-            }
-            catch (ClientResponseException cre)
-            {
-                var message = cre.InnerException?.Message ?? cre.Error.ToString();
-                AppendResponse("Identify: Status:" + message);
-            }
-            catch (XmlException xe)
-            {
-                var message = xe.InnerException?.Message ?? xe.Message;
-                AppendResponse("Identify: Status:" + message);
-            }
-        }
-
-        #endregion
-
         #region Search
-
 
         private async void txt_Search_searchString_TextChanged(object sender, EventArgs e)
         {
-            
             try
             {
                 var result = await _digipostService.Search(txt_Search_searchString.Text);
                 lock (_lockObject)
                 {
                     lbox_search_result.Items.Clear();
-                    AppendResponse("Search[" + txt_Search_searchString.Text + "]: count[" + result.PersonDetails.Count + "]");
+                    AppendResponse("Search[" + txt_Search_searchString.Text + "]: count[" + result.PersonDetails.Count +
+                                   "]");
                     foreach (var personDetail in result.PersonDetails)
                     {
                         lbox_search_result.Items.Add(personDetail);
@@ -146,8 +156,8 @@ namespace digipost_client_lib_formsapp
 
         private void lbox_search_result_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var listBox = (ListBox)sender;
-            var selectedItem = (SearchDetails)listBox.SelectedItem;
+            var listBox = (ListBox) sender;
+            var selectedItem = (SearchDetails) listBox.SelectedItem;
 
             btn_search_sendTo.Enabled = btn_search_moreInfo.Enabled = selectedItem != null;
         }
@@ -160,16 +170,16 @@ namespace digipost_client_lib_formsapp
 
         private void btn_search_sendTo_Click(object sender, EventArgs e)
         {
-            var selectedItem = (SearchDetails)lbox_search_result.SelectedItem;
+            var selectedItem = (SearchDetails) lbox_search_result.SelectedItem;
             txt_send_digipostAddress.Text = selectedItem.DigipostAddress;
             comboId.SelectedItem = IdentificationType.DigipostAddress;
             TabPanel.SelectTab(2);
         }
 
-
         #endregion
 
         #region Send
+
         public string ExtractedHtmlContent { get; set; }
 
         private void btn_send_selectFile_Click(object sender, EventArgs e)
@@ -184,10 +194,25 @@ namespace digipost_client_lib_formsapp
 
         private async void btn_send_send_Click(object sender, EventArgs e)
         {
-            await SendMessage(txt_send_subject.Text, (IdentificationType)comboId.SelectedItem, txt_send_digipostAddress.Text, txt_send_file.Text);
+            PrintDetails printdetails = null;
+            if (cbSendPrint.Checked)
+            {
+                printdetails =
+                    new PrintDetails(
+                        new PrintRecipient(txtSendPrintFullName.Text,
+                            new NorwegianAddress(txtSendPrintPostalCode.Text, txtSendPrintCity.Text,
+                                txtSendPrintAddress.Text)),
+                        new PrintReturnRecipient(txtSendPrintFullName_ret.Text,
+                            new NorwegianAddress(txtSendPrintPostalCode_Ret.Text, txtSendPrintCity_Ret.Text,
+                                txtSendPrintAddress_Ret.Text)));
+            }
+            await
+                SendMessage(txt_send_subject.Text, (IdentificationType) comboId.SelectedItem,
+                    txt_send_digipostAddress.Text, txt_send_file.Text, printdetails);
         }
 
-        private async Task SendMessage(string subject, IdentificationType identification, string identificationValue, string filePath)
+        private async Task SendMessage(string subject, IdentificationType identification, string identificationValue,
+            string filePath, PrintDetails printDetails)
         {
             byte[] file = null;
             var fileType = "";
@@ -205,9 +230,14 @@ namespace digipost_client_lib_formsapp
 
             try
             {
-                var response = await _digipostService.Send(file, fileType, subject, identification, identificationValue);
+                var response =
+                    await
+                        _digipostService.Send(file, fileType, subject, identification, identificationValue,
+                            printDetails: printDetails);
 
-                AppendResponse("Send: Status: " + response.Status + ", DeliveryMethod: " + response.DeliveryMethod + ", documentGuid:" + response.PrimaryDocument.Guid + ", DeliveryTime" + response.DeliveryTime);
+                AppendResponse("Send: Status: " + response.Status + ", DeliveryMethod: " + response.DeliveryMethod +
+                               ", documentGuid:" + response.PrimaryDocument.Guid + ", DeliveryTime" +
+                               response.DeliveryTime);
                 ResetSendView();
             }
             catch (ClientResponseException cre)
@@ -237,7 +267,8 @@ namespace digipost_client_lib_formsapp
         private void ActivateSendButton()
         {
             btn_send_send.Enabled = (!string.IsNullOrEmpty(txt_send_digipostAddress.Text)) &&
-                                    !string.IsNullOrEmpty(txt_send_file.Text) || !string.IsNullOrEmpty(ExtractedHtmlContent);
+                                    !string.IsNullOrEmpty(txt_send_file.Text) ||
+                                    !string.IsNullOrEmpty(ExtractedHtmlContent);
         }
 
         private void btn_send_createDocument_Click(object sender, EventArgs e)
@@ -249,16 +280,24 @@ namespace digipost_client_lib_formsapp
 
         private void ExtractTextFromEditorForm(object sender, CancelEventArgs args)
         {
-            var editorForm = (Form)sender;
-            foreach (var simpleHtml in (from object control in editorForm.Controls select control as Control into c where c.GetType() == typeof(RichTextBox) select c.Text).Select(text => text.Replace("\n", "<br/>")).Select(content => $"<html><body>{content}</body></html>"))
+            var editorForm = (Form) sender;
+            foreach (var simpleHtml in (from object control in editorForm.Controls
+                select control as Control
+                into c
+                where c.GetType() == typeof (RichTextBox)
+                select c.Text).Select(text => text.Replace("\n", "<br/>"))
+                .Select(content => $"<html><body>{content}</body></html>"))
             {
                 ExtractedHtmlContent = simpleHtml;
             }
             ActivateSendButton();
         }
 
+        private void cbSendPrint_CheckedChanged(object sender, EventArgs e)
+        {
+            gbSendPrint.Enabled = cbSendPrint.Checked;
+        }
 
         #endregion
-
     }
 }
