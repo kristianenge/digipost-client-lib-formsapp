@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace digipost_client_lib_formsapp
@@ -16,7 +13,7 @@ namespace digipost_client_lib_formsapp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DigipostForm());
+            Application.Run(new StartView());
         }
     }
 }

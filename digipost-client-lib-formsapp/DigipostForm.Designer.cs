@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rtf_response_text = new System.Windows.Forms.RichTextBox();
             this.lbl_response_info = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.TP_Send = new System.Windows.Forms.TabPage();
+            this.cbSendPrint = new System.Windows.Forms.CheckBox();
             this.gbSendPrint = new System.Windows.Forms.GroupBox();
             this.lblSendPrintFrom = new System.Windows.Forms.Label();
             this.lblSendPrintTO = new System.Windows.Forms.Label();
@@ -61,7 +63,6 @@
             this.lbl_send_subject = new System.Windows.Forms.Label();
             this.btn_send_send = new System.Windows.Forms.Button();
             this.btn_send_selectFile = new System.Windows.Forms.Button();
-            this.cbSendPrint = new System.Windows.Forms.CheckBox();
             this.TP_Search = new System.Windows.Forms.TabPage();
             this.btn_search_sendTo = new System.Windows.Forms.Button();
             this.btn_search_moreInfo = new System.Windows.Forms.Button();
@@ -75,6 +76,7 @@
             this.txt_identify_ssn = new System.Windows.Forms.TextBox();
             this.btnIdentify = new System.Windows.Forms.Button();
             this.btnConfig = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel1.SuspendLayout();
             this.TP_Send.SuspendLayout();
             this.gbSendPrint.SuspendLayout();
@@ -133,6 +135,16 @@
             this.TP_Send.TabIndex = 2;
             this.TP_Send.Text = "Send";
             this.TP_Send.UseVisualStyleBackColor = true;
+            // 
+            // cbSendPrint
+            // 
+            this.cbSendPrint.AutoSize = true;
+            this.cbSendPrint.Location = new System.Drawing.Point(31, 87);
+            this.cbSendPrint.Name = "cbSendPrint";
+            this.cbSendPrint.Size = new System.Drawing.Size(15, 14);
+            this.cbSendPrint.TabIndex = 18;
+            this.cbSendPrint.UseVisualStyleBackColor = true;
+            this.cbSendPrint.CheckedChanged += new System.EventHandler(this.cbSendPrint_CheckedChanged);
             // 
             // gbSendPrint
             // 
@@ -389,16 +401,6 @@
             this.btn_send_selectFile.UseVisualStyleBackColor = true;
             this.btn_send_selectFile.Click += new System.EventHandler(this.btn_send_selectFile_Click);
             // 
-            // cbSendPrint
-            // 
-            this.cbSendPrint.AutoSize = true;
-            this.cbSendPrint.Location = new System.Drawing.Point(31, 87);
-            this.cbSendPrint.Name = "cbSendPrint";
-            this.cbSendPrint.Size = new System.Drawing.Size(15, 14);
-            this.cbSendPrint.TabIndex = 18;
-            this.cbSendPrint.UseVisualStyleBackColor = true;
-            this.cbSendPrint.CheckedChanged += new System.EventHandler(this.cbSendPrint_CheckedChanged);
-            // 
             // TP_Search
             // 
             this.TP_Search.Controls.Add(this.btn_search_sendTo);
@@ -530,6 +532,11 @@
             this.btnConfig.UseVisualStyleBackColor = true;
             this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // DigipostForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -603,5 +610,6 @@
         private System.Windows.Forms.TextBox txtSendPrintAddress;
         private System.Windows.Forms.TextBox txtSendPrintFullName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
